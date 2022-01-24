@@ -93,8 +93,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a, b, c) {
-  const cHaveToBe = Math.sqrt(a ** 2 + b ** 2);
-  if (cHaveToBe === c) {
+  if (a + b > c && b + c > a && c + a > b) {
     return true;
   }
   return false;
