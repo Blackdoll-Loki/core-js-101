@@ -53,8 +53,10 @@ function parseDataFromIso8601(value) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  date.setDate(29);
+  if (date.getMonth() === 1) return true;
+  return false;
 }
 
 
@@ -73,8 +75,22 @@ function isLeapYear(/* date */) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-function timeSpanToString(/* startDate, endDate */) {
-  throw new Error('Not implemented');
+function timeSpanToString(startDate, endDate) {
+  const hours = endDate.getHours() - startDate.getHours();
+  const minutes = endDate.getMinutes() - startDate.getMinutes();
+  const sec = endDate.getSeconds() - startDate.getSeconds();
+  const ms = endDate.getMilliseconds() - startDate.getMilliseconds();
+  const arr = [
+    `0${hours}`,
+    `0${minutes}`,
+    `0${sec}`,
+    `00${ms}`,
+  ];
+  const shortenStrs = arr.map((str, idx) => {
+    if (idx === 3) return str.slice(-3);
+    return str.slice(-2);
+  });
+  return `${shortenStrs[0]}:${shortenStrs[1]}:${shortenStrs[2]}.${shortenStrs[3]}`;
 }
 
 
